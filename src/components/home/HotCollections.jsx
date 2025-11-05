@@ -10,7 +10,7 @@ const skeletonStyles = `
       90deg,
       #f0f0f0 25%,
       #e0e0e0 37%,
-      #f0f0f0 63%
+      #f0f0f0 64%
     );
     background-size: 400% 100%;
     animation: shimmer 1.5s infinite;
