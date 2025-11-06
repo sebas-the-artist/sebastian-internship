@@ -5,7 +5,6 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
-// Skeleton CSS for shimmer loading cards (injected inline)
 const skeletonStyles = `
   .skeleton-card {
     background: linear-gradient(
@@ -92,7 +91,6 @@ const HotCollections = () => {
       .catch(() => setLoading(false));
   }, []);
 
-  // Owl Carousel responsive settings
   const responsive = {
     0: { items: 1 },
     600: { items: 2 },
