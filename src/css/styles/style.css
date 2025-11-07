@@ -11517,6 +11517,9 @@ section.no-padding {
   height: 8px;
   margin: 0 5px;
   border-radius: 30px;
+
+  display: none;
+  visibility: hidden;
 }
 
 .owl-theme .owl-dots .owl-dot span {
