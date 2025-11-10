@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-// Skeleton styles for loading placeholders
 const skeletonStyles = `
   .skeleton {
     background: linear-gradient(
@@ -31,7 +30,7 @@ const skeletonStyles = `
     margin-bottom: 4px;
   }
   .skeleton.skeleton-span {
-    width: 40px;
+    width: 39px;
     height: 16px;
   }
 `;
