@@ -25,10 +25,14 @@ const LandingIntro = () => {
           <div className="col-lg-4 col-md-6 mb-sm-30">
             <div
               className="feature-box f-boxed style-3"
-              data-aos="fade-up-right"
-              data-aos-delay="300"
+              data-aos="fade-up"
+              data-aos-delay="200"
             >
-              <i className="bg-color-2 i-boxed icon_wallet"></i>
+              <i
+                className="bg-color-2 i-boxed icon_wallet"
+                data-aos="fade-left"
+                data-aos-delay="400"
+              ></i>
               <div className="text">
                 <h4 className="">Set up your wallet</h4>
                 <p>
@@ -39,13 +43,18 @@ const LandingIntro = () => {
               <i className="wm icon_wallet"></i>
             </div>
           </div>
+
           <div className="col-lg-4 col-md-6 mb-sm-30">
             <div
               className="feature-box f-boxed style-3"
               data-aos="fade-up"
-              data-aos-delay="400"
+              data-aos-delay="200"
             >
-              <i className="bg-color-2 i-boxed icon_cloud-upload_alt"></i>
+              <i
+                className="bg-color-2 i-boxed icon_cloud-upload_alt"
+                data-aos="fade-left"
+                data-aos-delay="400"
+              ></i>
               <div className="text">
                 <h4 className="">Add your NFT's</h4>
                 <p>
@@ -56,13 +65,18 @@ const LandingIntro = () => {
               <i className="wm icon_cloud-upload_alt"></i>
             </div>
           </div>
+
           <div className="col-lg-4 col-md-6 mb-sm-30">
             <div
               className="feature-box f-boxed style-3"
-              data-aos="fade-up-left"
-              data-aos-delay="400"
+              data-aos="fade-up"
+              data-aos-delay="200"
             >
-              <i className="bg-color-2 i-boxed icon_tags_alt"></i>
+              <i
+                className="bg-color-2 i-boxed icon_tags_alt"
+                data-aos="fade-left"
+                data-aos-delay="400"
+              ></i>
               <div className="text">
                 <h4 className="">Sell your NFT's</h4>
                 <p>
