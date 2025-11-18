@@ -24,13 +24,17 @@ const HotCollections = () => {
   return (
     <section id="section-collections" className="no-bottom">
       <div className="container">
-        <div className="row" data-aos="fade-up" data-aos-delay="200">
+        <div className="row" data-aos="fade-up" data-aos-delay="100">
           <div className="col-lg-12">
             <div className="text-center">
-              <h2 data-aos="fade-down" data-aos-delay="400">
+              <h2 data-aos="fade-down" data-aos-delay="300">
                 Hot Collections
               </h2>
-              <div className="small-border bg-color-2"></div>
+              <div
+                className="small-border bg-color-2"
+                data-aos="fade-right"
+                data-aos-delay="800"
+              ></div>
             </div>
           </div>
           {new Array(4).fill(0).map((_, index) => (
