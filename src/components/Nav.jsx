@@ -3,6 +3,8 @@ import Logo from "../images/Ultraverse.png";
 import { Link } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 
+//hello, dont mind me just trying to merge all my work
+
 const Nav = () => {
   const openNav = () => {
     document.body.classList += "menu__open";
