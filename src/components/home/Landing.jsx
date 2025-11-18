@@ -8,16 +8,16 @@ import "aos/dist/aos.css";
 
 const Landing = () => {
   useEffect(() => {
-    AOS.init({ duration: 1000, once: false }); // Initialize once with all options
+    AOS.init({ duration: 1000, once: false });
 
     const handleLoad = () => {
-      AOS.refresh(); // Refresh AOS on window load event
+      AOS.refresh();
     };
 
-    window.addEventListener("load", handleLoad); // Set listener
+    window.addEventListener("load", handleLoad);
 
     return () => {
-      window.removeEventListener("load", handleLoad); // Cleanup listener
+      window.removeEventListener("load", handleLoad);
     };
   }, []);
 
