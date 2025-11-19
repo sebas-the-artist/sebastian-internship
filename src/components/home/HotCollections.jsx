@@ -5,6 +5,9 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const skeletonStyles = `
   .skeleton-card {
     background: linear-gradient(
@@ -98,15 +101,35 @@ const HotCollections = () => {
     1200: { items: 4 },
   };
 
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: false });
+
+    const handleLoad = () => {
+      AOS.refresh();
+    };
+
+    window.addEventListener("load", handleLoad);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
+  }, []);
+
   return (
     <>
       <style>{skeletonStyles}</style>
       <section id="section-collections" className="no-bottom">
         <div className="container carousel-container">
-          <div className="row">
+          <div className="row" data-aos="fade-up" data-aos-delay="100">
             <div className="col-lg-12 text-center">
-              <h2>Hot Collections</h2>
-              <div className="small-border bg-color-2"></div>
+              <h2 data-aos="fade-down" data-aos-delay="300">
+                Hot Collections
+              </h2>
+              <div
+                className="small-border bg-color-2"
+                data-aos="fade-right"
+                data-aos-delay="800"
+              ></div>
             </div>
             {loading ? (
               <div className="d-flex justify-content-center col-12">
