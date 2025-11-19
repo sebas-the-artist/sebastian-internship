@@ -7,12 +7,7 @@ const ExploreItems = () => {
   return (
     <>
       <div>
-        <select
-          id="filter-items"
-          defaultValue=""
-          data-aos="fade-right"
-          data-aos-delay="400"
-        >
+        <select id="filter-items" defaultValue="">
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
           <option value="price_high_to_low">Price, High to Low</option>
@@ -25,7 +20,7 @@ const ExploreItems = () => {
           className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
           style={{ display: "block", backgroundSize: "cover" }}
         >
-          <div className="nft__item" data-aos="fade-up" data-aos-delay="100">
+          <div className="nft__item">
             <div className="author_list_pp">
               <Link
                 to="/author"

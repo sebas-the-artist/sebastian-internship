@@ -1,26 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import NFT from "../../images/nft.png";
 import backgroundImage from "../../images/bg-shape-1.jpg";
 import { Link } from "react-router-dom";
 
-import AOS from "aos";
-import "aos/dist/aos.css";
-
 const Landing = () => {
-  useEffect(() => {
-    AOS.init({ duration: 1000, once: false });
-
-    const handleLoad = () => {
-      AOS.refresh();
-    };
-
-    window.addEventListener("load", handleLoad);
-
-    return () => {
-      window.removeEventListener("load", handleLoad);
-    };
-  }, []);
-
   return (
     <section
       id="section-hero"
@@ -35,41 +18,25 @@ const Landing = () => {
             <div className="col-md-6">
               <div className="spacer-single"></div>
               <h6>
-                <span
-                  className="text-uppercase id-color-2"
-                  data-aos="fade-down"
-                  data-aos-delay="1200"
-                >
+                <span className="text-uppercase id-color-2">
                   Ultraverse Market
                 </span>
               </h6>
               <div className="spacer-10"></div>
-              <h1 data-aos="fade-up" data-aos-delay="400">
-                Create, sell or collect digital items.
-              </h1>
-              <p className="lead" data-aos="fade-right" data-aos-delay="800">
+              <h1>Create, sell or collect digital items.</h1>
+              <p className="lead">
                 Unit of data stored on a digital ledger, called a blockchain,
                 that certifies a digital asset to be unique and therefore not
-                interchangeable.
+                interchangeable
               </p>
               <div className="spacer-10"></div>
-              <Link
-                className="btn-main lead"
-                to="/explore"
-                data-aos="fade-down"
-                data-aos-delay="1200"
-              >
+              <Link className="btn-main lead" to="/explore">
                 Explore
               </Link>
               <div className="mb-sm-30"></div>
             </div>
             <div className="col-md-6 xs-hide">
-              <img
-                src={NFT}
-                className="lazy img-fluid"
-                alt=""
-                data-aos="fade-left"
-              />
+              <img src={NFT} className="lazy img-fluid" alt="" />
             </div>
           </div>
         </div>

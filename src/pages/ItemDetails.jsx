@@ -1,114 +1,213 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import EthImage from "../images/ethereum.svg";
-import { Link } from "react-router-dom";
-import AuthorImage from "../images/author_thumbnail.jpg";
-import nftImage from "../images/nftImage.jpg";
 
-import AOS from "aos";
-import "aos/dist/aos.css";
+const skeletonBox = {
+  background: "#e2e5e7",
+  borderRadius: "10px",
+  width: "100%",
+  margin: "8px 0",
+  minHeight: "20px",
+};
 
 const ItemDetails = () => {
+  const { nftId } = useParams();
+  const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    AOS.init({ duration: 1000, once: false });
-
-    const handleLoad = () => {
-      AOS.refresh();
-    };
-
-    window.addEventListener("load", handleLoad);
-
-    return () => {
-      window.removeEventListener("load", handleLoad);
-    };
-  }, []);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    if (!nftId) return;
+    setLoading(true);
+    fetch(
+      `https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${nftId}`
+    )
+      .then((res) => {
+        if (!res.ok) throw new Error("Network error");
+        return res.json();
+      })
+      .then((data) => {
+        setItem(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, [nftId]);
 
   return (
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
-        <div id="top"></div>
+        <div id="top" />
         <section aria-label="section" className="mt90 sm-mt-0">
           <div className="container">
             <div className="row">
-              <div
-                className="col-md-6 text-center"
-                data-aos="fade-right"
-                data-aos-delay="200"
-              >
-                <img
-                  src={nftImage}
-                  className="img-fluid img-rounded mb-sm-30 nft-image"
-                  alt=""
-                  data-aos="flip-right"
-                  data-aos-delay="100"
-                />
+              <div className="col-md-6 text-center">
+                {loading ? (
+                  <div
+                    style={{
+                      ...skeletonBox,
+                      height: "360px",
+                      borderRadius: "16px",
+                      margin: "0 auto",
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={item?.nftImage}
+                    alt={item?.title}
+                    className="img-fluid img-rounded mb-sm-30 nft-image"
+                  />
+                )}
               </div>
               <div className="col-md-6">
-                <div
-                  className="item_info"
-                  data-aos="fade-left"
-                  data-aos-delay="100"
-                >
-                  <h2>Rainbow Style #194</h2>
-
+                <div className="item_info">
+                  {loading ? (
+                    <div
+                      style={{
+                        ...skeletonBox,
+                        width: "70%",
+                        minHeight: "28px",
+                      }}
+                    />
+                  ) : (
+                    <h2>{item?.title}</h2>
+                  )}
                   <div className="item_info_counts">
-                    <div className="item_info_views">
-                      <i className="fa fa-eye"></i>
-                      100
-                    </div>
-                    <div className="item_info_like">
-                      <i className="fa fa-heart"></i>
-                      74
-                    </div>
+                    {loading ? (
+                      <>
+                        <div
+                          style={{
+                            ...skeletonBox,
+                            width: "80px",
+                            display: "inline-block",
+                          }}
+                        />
+                        <div
+                          style={{
+                            ...skeletonBox,
+                            width: "80px",
+                            display: "inline-block",
+                            marginLeft: "12px",
+                          }}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <div className="item_info_views">
+                          <i className="fa fa-eye" /> {item?.views}
+                        </div>
+                        <div className="item_info_like">
+                          <i className="fa fa-heart" /> {item?.likes}
+                        </div>
+                      </>
+                    )}
                   </div>
-                  <p>
-                    doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-                    illo inventore veritatis et quasi architecto beatae vitae
-                    dicta sunt explicabo.
-                  </p>
+                  {loading ? (
+                    <>
+                      <div style={skeletonBox} />
+                      <div style={skeletonBox} />
+                      <div style={{ ...skeletonBox, width: "80%" }} />
+                    </>
+                  ) : (
+                    <p>{item?.description}</p>
+                  )}
                   <div className="d-flex flex-row">
                     <div className="mr40">
                       <h6>Owner</h6>
                       <div className="item_author">
-                        <div className="author_list_pp">
-                          <Link to="/author">
-                            <img className="lazy" src={AuthorImage} alt="" />
-                            <i className="fa fa-check"></i>
+                        {loading ? (
+                          <div
+                            style={{
+                              ...skeletonBox,
+                              width: "50px",
+                              height: "50px",
+                              borderRadius: "50%",
+                            }}
+                          />
+                        ) : (
+                          <Link to={`/author/${item?.ownerId}`}>
+                            <img
+                              src={item?.ownerImage}
+                              alt={item?.ownerName}
+                              className="lazy"
+                              style={{
+                                width: "50px",
+                                height: "50px",
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                              }}
+                            />
+                            <i className="fa fa-check" />
                           </Link>
-                        </div>
-                        <div className="author_list_info">
-                          <Link to="/author">Monica Lucas</Link>
-                        </div>
+                        )}
+                        {!loading && (
+                          <div className="author_list_info">
+                            <Link to={`/author/${item?.ownerId}`}>
+                              {item?.ownerName}
+                            </Link>
+                          </div>
+                        )}
                       </div>
                     </div>
-                    <div></div>
+                    <div className="mr40">
+                      <h6>Creator</h6>
+                      <div className="item_author">
+                        {loading ? (
+                          <div
+                            style={{
+                              ...skeletonBox,
+                              width: "50px",
+                              height: "50px",
+                              borderRadius: "50%",
+                            }}
+                          />
+                        ) : (
+                          <Link to={`/author/${item?.creatorId}`}>
+                            <img
+                              src={item?.creatorImage}
+                              alt={item?.creatorName}
+                              className="lazy"
+                              style={{
+                                width: "50px",
+                                height: "50px",
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                              }}
+                            />
+                            <i className="fa fa-check" />
+                          </Link>
+                        )}
+                        {!loading && (
+                          <div className="author_list_info">
+                            <Link to={`/author/${item?.creatorId}`}>
+                              {item?.creatorName}
+                            </Link>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                   <div className="de_tab tab_simple">
                     <div className="de_tab_content">
-                      <h6>Creator</h6>
-                      <div className="item_author">
-                        <div className="author_list_pp">
-                          <Link to="/author">
-                            <img className="lazy" src={AuthorImage} alt="" />
-                            <i className="fa fa-check"></i>
-                          </Link>
+                      <div className="spacer-40" />
+                      <h6>Price</h6>
+                      {loading ? (
+                        <div
+                          style={{
+                            ...skeletonBox,
+                            width: "120px",
+                            minHeight: "32px",
+                          }}
+                        />
+                      ) : (
+                        <div className="nft-item-price">
+                          <img src={EthImage} alt="ETH" />
+                          <span>{item?.price}</span>
                         </div>
-                        <div className="author_list_info">
-                          <Link to="/author">Monica Lucas</Link>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="spacer-40"></div>
-                    <h6>Price</h6>
-                    <div className="nft-item-price">
-                      <img src={EthImage} alt="" />
-                      <span>1.85</span>
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
+              {/* end right */}
             </div>
           </div>
         </section>
