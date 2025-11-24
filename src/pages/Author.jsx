@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import AuthorItems from "../components/author/AuthorItems";
 import AuthorBanner from "../images/author_banner.jpg";
 
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const skeletonBox = {
   background: "#e2e5e7",
   borderRadius: "10px",
@@ -34,6 +37,20 @@ const Author = () => {
       });
   }, [effectiveAuthorId]);
 
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: false });
+
+    const handleLoad = () => {
+      AOS.refresh();
+    };
+
+    window.addEventListener("load", handleLoad);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
+  });
+
   const handleFollowToggle = () => {
     setFollowers((prev) => prev + (hasFollowed ? -1 : 1));
     setHasFollowed((prev) => !prev);
@@ -45,6 +62,8 @@ const Author = () => {
         <div id="top"></div>
         <section
           id="profile_banner"
+          data-aos="fade-down"
+          data-aos-delay="000"
           aria-label="section"
           className="text-light"
           data-bgimage={`url(${AuthorBanner}) top`}
@@ -56,7 +75,11 @@ const Author = () => {
               <div className="col-md-12">
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
-                    <div className="profile_avatar">
+                    <div
+                      className="profile_avatar"
+                      data-aos="fade-right"
+                      data-aos-delay="600"
+                    >
                       {loading ? (
                         <div>
                           <div
@@ -130,7 +153,11 @@ const Author = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="profile_follow de-flex">
+                  <div
+                    className="profile_follow de-flex"
+                    data-aos="fade-left"
+                    data-aos-delay="600"
+                  >
                     <div className="de-flex-col">
                       {loading ? (
                         <>

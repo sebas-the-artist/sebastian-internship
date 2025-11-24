@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const skeletonStyles = {
   item: {
@@ -48,8 +51,24 @@ const skeletonStyles = {
   },
 };
 
+const Author = () => {
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: false });
+
+    const handleLoad = () => {
+      AOS.refresh();
+    };
+
+    window.addEventListener("load", handleLoad);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
+  });
+};
+
 const AuthorItems = ({ nfts, loading, authorImage }) => (
-  <div className="de_tab_content">
+  <div className="de_tab_content" data-aos="fade-up" data-aos-delay="600">
     <div className="tab-1">
       <div className="row">
         {loading
