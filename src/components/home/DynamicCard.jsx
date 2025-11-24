@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 import CountdownTimer from "./CountdownTimer";
 
@@ -11,8 +13,17 @@ const DynamicCard = ({
   minHeight = "420px",
 }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: false });
+  }, []);
   return (
-    <div className="nft__item" style={{ minHeight }}>
+    <div
+      className="nft__item"
+      data-aos="fade-up"
+      data-aos-delay="200"
+      style={{ minHeight }}
+    >
       <div className="author_list_pp">
         <Link
           to={`/author/${item.authorId}`}
