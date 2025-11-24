@@ -103,13 +103,13 @@ const NewItems = () => {
         <div className="container carousel-container">
           <div className="row">
             <div className="col-lg-12 text-center">
-              <h2 data-aos="fade-up" data-aos-delay="101">
+              <h2 data-aos="fade-down" data-aos-delay="101">
                 New Items
               </h2>
               <div
                 className="small-border bg-color-2"
                 data-aos="fade-right"
-                data-aos-delay="600"
+                data-aos-delay="800"
               ></div>
             </div>
             {loading ? (
