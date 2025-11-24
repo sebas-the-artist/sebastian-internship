@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import EthImage from "../images/ethereum.svg";
 
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const skeletonBox = {
   background: "#e2e5e7",
   borderRadius: "10px",
@@ -14,6 +17,20 @@ const ItemDetails = () => {
   const { nftId } = useParams();
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: false });
+
+    const handleLoad = () => {
+      AOS.refresh();
+    };
+
+    window.addEventListener("load", handleLoad);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
+  });
 
   useEffect(() => {
     if (!nftId) return;
@@ -54,11 +71,17 @@ const ItemDetails = () => {
                     src={item?.nftImage}
                     alt={item?.title}
                     className="img-fluid img-rounded mb-sm-30 nft-image"
+                    data-aos="fade-down"
+                    data-aos-delay="200"
                   />
                 )}
               </div>
               <div className="col-md-6">
-                <div className="item_info">
+                <div
+                  className="item_info"
+                  data-aos="fade-up"
+                  data-aos-delay="200"
+                >
                   {loading ? (
                     <div
                       style={{
