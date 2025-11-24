@@ -12055,6 +12055,7 @@ a.read_more i {
 .owl-custom-nav .btn-next,
 .owl-custom-nav .btn-prev {
   opacity: 0;
+  color: white;
 }
 
 .owl-custom-nav .btn-next {
@@ -12080,6 +12081,7 @@ a.read_more i {
 .owl-custom-nav .btn-next:before,
 .owl-custom-nav .btn-prev:before {
   font-size: 18px;
+  color: white;
 }
 
 .owl-custom-nav .btn-next:before {
@@ -12179,6 +12181,15 @@ a.read_more i {
   position: absolute;
   left: -40px;
   top: -13px;
+}
+
+.carousel-container {
+  width: 100%;
+  overflow: visible;
+}
+.owl-carousel,
+.owl-stage-outer {
+  overflow: visible !important;
 }
 
 .owl-dots {

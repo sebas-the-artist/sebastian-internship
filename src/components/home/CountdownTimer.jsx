@@ -1,33 +1,37 @@
 import React, { useState, useEffect } from "react";
 
-function getTimeLeft(expiryDate) {
-  const total = Date.parse(expiryDate) - Date.now();
-  const seconds = Math.floor((total / 1000) % 60);
-  const minutes = Math.floor((total / 1000 / 60) % 60);
-  const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
-  const days = Math.floor(total / (1000 * 60 * 60 * 24));
-  return { total, days, hours, minutes, seconds };
-}
+// Helper function to calculate time left
+const getCountdown = (expiryDate, now) => {
+  if (!expiryDate) return null;
+  const diff = new Date(expiryDate) - new Date(now);
+  if (diff <= 0) return null;
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+  return [
+    String(hours).padStart(2, "0"),
+    String(minutes).padStart(2, "0"),
+    String(seconds).padStart(2, "0"),
+  ];
+};
 
 const CountdownTimer = ({ expiryDate }) => {
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft(expiryDate));
+  const [now, setNow] = useState(Date.now());
 
   useEffect(() => {
-    if (!expiryDate) return;
-    const timer = setInterval(() => {
-      setTimeLeft(getTimeLeft(expiryDate));
-    }, 1000);
-
+    const timer = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(timer);
-  }, [expiryDate]);
+  }, []);
 
-  if (!expiryDate) return null;
-  if (timeLeft.total <= 0) return <span>Time's up!</span>;
+  const countdown = getCountdown(expiryDate, now);
+
+  // If there's no valid countdown (expired or missing), render nothing!
+  if (!countdown) return null;
 
   return (
-    <div className="countdown-timer">
-      {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
-    </div>
+    <>
+      {countdown[0]}h {countdown[1]}m {countdown[2]}s
+    </>
   );
 };
 
