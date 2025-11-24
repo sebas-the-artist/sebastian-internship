@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import DynamicCard from "../DynamicCard";
 import CountdownTimer from "../CountdownTimer";
 
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const ITEMS_PER_PAGE = 4;
 const INITIAL_COUNT = 8;
 
@@ -10,6 +13,20 @@ const ExploreItems = () => {
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("");
+
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: false });
+
+    const handleLoad = () => {
+      AOS.refresh();
+    };
+
+    window.addEventListener("load", handleLoad);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
+  });
 
   useEffect(() => {
     setLoading(true);
@@ -35,6 +52,8 @@ const ExploreItems = () => {
           id="filter-items"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
+          data-aos="fade-right"
+          data-aos-delay="1000"
         >
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
@@ -43,7 +62,7 @@ const ExploreItems = () => {
         </select>
       </div>
 
-      <div className="row">
+      <div className="row" data-aos="fade-up" data-aos-delay="2">
         {loading
           ? [...Array(INITIAL_COUNT)].map((_, index) => (
               <div
