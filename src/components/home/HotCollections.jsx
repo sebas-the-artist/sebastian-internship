@@ -282,7 +282,7 @@ const HotCollections = () => {
                     <Link to={`/explore/${col.nftId}`}>
                       <h4>{col.title}</h4>
                     </Link>
-                    <span>{col.code}</span>
+                    <span>ERC-{col.code}</span>
                   </div>
                 </div>
               ))}
