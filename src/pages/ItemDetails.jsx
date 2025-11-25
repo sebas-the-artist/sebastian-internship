@@ -9,7 +9,7 @@ import "aos/dist/aos.css";
 
 const ItemDetails = () => {
   useEffect(() => {
-    AOS.init({ duration: 1000, once: false });
+    AOS.init({ duration: 1001, once: false });
 
     const handleLoad = () => {
       AOS.refresh();

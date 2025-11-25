@@ -11,7 +11,7 @@ const ExploreItems = () => {
           id="filter-items"
           defaultValue=""
           data-aos="fade-right"
-          data-aos-delay="400"
+          data-aos-delay="401"
         >
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
