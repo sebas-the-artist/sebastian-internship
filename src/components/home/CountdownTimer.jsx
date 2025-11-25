@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-// Helper function to calculate time left
 const getCountdown = (expiryDate, now) => {
   if (!expiryDate) return null;
   const diff = new Date(expiryDate) - new Date(now);
@@ -25,7 +24,6 @@ const CountdownTimer = ({ expiryDate }) => {
 
   const countdown = getCountdown(expiryDate, now);
 
-  // If there's no valid countdown (expired or missing), render nothing!
   if (!countdown) return null;
 
   return (

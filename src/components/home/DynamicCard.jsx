@@ -21,7 +21,7 @@ const DynamicCard = ({
     <div
       className="nft__item"
       data-aos="fade-up"
-      data-aos-delay="200"
+      data-aos-delay="202"
       style={{ minHeight }}
     >
       <div className="author_list_pp">

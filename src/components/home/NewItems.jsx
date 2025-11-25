@@ -43,7 +43,7 @@ const skeletonStyles = `
     position: absolute;
     top: 40%;
     transform: translateY(-50%);
-    background: rgba(34,34,34,0.7);
+    background: rgba(34,33,34,0.7);
     border-radius: 50%;
     border: none;
     width: 40px;
