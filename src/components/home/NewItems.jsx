@@ -83,6 +83,17 @@ const NewItems = () => {
         setLoading(false);
       })
       .catch(() => setLoading(false));
+    AOS.init({ duration: 1001, once: false });
+
+    const handleLoad = () => {
+      AOS.refresh();
+    };
+
+    window.addEventListener("load", handleLoad);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
   }, []);
 
   useEffect(() => {
@@ -103,7 +114,7 @@ const NewItems = () => {
         <div className="container carousel-container">
           <div className="row">
             <div className="col-lg-12 text-center">
-              <h2 data-aos="fade-down" data-aos-delay="101">
+              <h2 data-aos="fade-down" data-aos-delay="201">
                 New Items
               </h2>
               <div

@@ -44,6 +44,8 @@ body {
   padding: 0;
   line-height: 26px;
   word-spacing: 0px;
+
+  overflow-x: hidden;
 }
 
 .dark-scheme {
@@ -713,7 +715,7 @@ header .header-col.mid .social-icons {
   font-size: 14px;
   display: block;
   float: none;
-  text-transform: none;
+  /* text-transform: none; */
 }
 
 #mainmenu li:hover > ul {
@@ -1333,7 +1335,7 @@ footer h5,
 .de_light footer h5 {
   color: #fff;
   font-size: 18px;
-  text-transform: none;
+  /* text-transform: none; */
 }
 
 footer a {
@@ -1963,7 +1965,7 @@ header.header-light .logo-2 {
   color: #333;
   letter-spacing: normal;
   font-size: 24px;
-  text-transform: none;
+  /* text-transform: none; */
 }
 
 .blog-carousel ul,
@@ -3154,7 +3156,7 @@ header a.btn-main i {
 
 .col-right a.btn-main {
   font-size: 14px;
-  text-transform: none;
+  /* text-transform: none; */
 }
 
 a.btn-border {
@@ -3913,7 +3915,7 @@ h4.s3 {
 }
 
 .call-to-action h4 {
-  text-transform: none;
+  /* text-transform: none; */
   font-size: 20px;
 }
 
@@ -3932,7 +3934,7 @@ h1.title {
 }
 
 h1.title strong {
-  text-transform: none;
+  /* text-transform: none; */
   letter-spacing: 0;
   font-weight: normal;
 }
@@ -3987,7 +3989,7 @@ h2.hw {
   display: block;
   font-family: "Parisienne";
   font-size: 48px;
-  text-transform: none;
+  /* text-transform: none; */
   font-weight: lighter;
 }
 
@@ -7242,9 +7244,9 @@ a.btn-right {
   width: 80px;
 }
 
-.timeline .tl-block .tl-message h4 {
-  text-transform: none;
-}
+/*.timeline .tl-block .tl-message h4 {
+   text-transform: none; 
+} */
 
 .timeline .tl-block .tl-time h4 {
   margin: 0 0 10px 0;
@@ -11689,7 +11691,7 @@ section.no-padding {
 }
 
 .overlay-bg.dark {
-  background: rgba(20, 20, 20, 0.8);
+  background: rgba(20, 20, 21, 0.8);
 }
 
 .overlay-bg.gradient-blue-aqua {
@@ -15135,7 +15137,7 @@ a.btn-slider:hover {
 #testimonial-full span {
   letter-spacing: 0;
   margin-top: 20px;
-  text-transform: none;
+  /* text-transform: none; */
 }
 
 .testi-slider .flex-control-nav {

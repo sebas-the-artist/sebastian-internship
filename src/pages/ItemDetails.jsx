@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import EthImage from "../images/ethereum.svg";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const skeletonBox = {
   background: "#e2e5e7",
@@ -31,6 +33,24 @@ const ItemDetails = () => {
       })
       .catch(() => setLoading(false));
   }, [nftId]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    AOS.init({ duration: 1001, once: false });
+
+    const handleLoad = () => {
+      AOS.refresh();
+    };
+
+    window.addEventListener("load", handleLoad);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
+  }, []);
 
   return (
     <div id="wrapper">

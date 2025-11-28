@@ -43,6 +43,17 @@ const HotCollections = () => {
         setLoading(false);
       })
       .catch(() => setLoading(false));
+    AOS.init({ duration: 1001, once: false });
+
+    const handleLoad = () => {
+      AOS.refresh();
+    };
+
+    window.addEventListener("load", handleLoad);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
   }, []);
 
   useEffect(() => {
@@ -61,9 +72,9 @@ const HotCollections = () => {
       <style>{skeletonStyles}</style>
       <section id="section-collections" className="no-bottom">
         <div className="container carousel-container">
-          <div className="row" data-aos="fade-up" data-aos-delay="100">
+          <div className="row" data-aos="fade-up" data-aos-delay="300">
             <div className="col-lg-12 text-center">
-              <h2 data-aos="fade-down" data-aos-delay="300">
+              <h2 data-aos="fade-down" data-aos-delay="200">
                 Hot Collections
               </h2>
               <div
