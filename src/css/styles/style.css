@@ -16731,3 +16731,16 @@ img {
 .no-cursor {
   cursor: not-allowed;
 }
+
+html:not(.no-js) [data-aos^="fade"][data-aos^="fade"].aos-animate,
+.tranny {
+  opacity: 1; /* keep the opacity behavior */
+  transform: translate3d(0, 0, 0) !important; /* override other transforms */
+  transition-delay: none;
+}
+html:not(.no-js) [data-aos="fade-up"].aos-animate,
+html:not(.no-js) [data-aos="fade-down"].aos-animate,
+html:not(.no-js) [data-aos="fade-left"].aos-animate,
+html:not(.no-js) [data-aos="fade-right"].aos-animate {
+  transform: translate3d(0, 0, 0);
+}

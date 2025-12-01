@@ -21,7 +21,7 @@ const DynamicCard = ({
     <div
       className="nft__item"
       data-aos="fade-up"
-      data-aos-delay="202"
+      data-aos-delay="201"
       style={{ minHeight }}
     >
       <div className="author_list_pp">
@@ -39,7 +39,7 @@ const DynamicCard = ({
       </div>
       {timerText && <div className="de_countdown">{timerText}</div>}
       <div className="nft__item_wrap">
-        <Link to={`/item-details/${item.id}`}>
+        <Link to={`/item-details/${item.nftId}`}>
           <img
             src={item.nftImage}
             className="lazy nft__item_preview"

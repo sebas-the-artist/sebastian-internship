@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import EthImage from "../images/ethereum.svg";
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -17,8 +18,10 @@ const ItemDetails = () => {
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Fetch item details once per nftId
   useEffect(() => {
     if (!nftId) return;
+
     setLoading(true);
     fetch(
       `https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${nftId}`
@@ -34,10 +37,12 @@ const ItemDetails = () => {
       .catch(() => setLoading(false));
   }, [nftId]);
 
+  // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  // AOS init once
   useEffect(() => {
     AOS.init({ duration: 1001, once: false });
 
@@ -46,10 +51,7 @@ const ItemDetails = () => {
     };
 
     window.addEventListener("load", handleLoad);
-
-    return () => {
-      window.removeEventListener("load", handleLoad);
-    };
+    return () => window.removeEventListener("load", handleLoad);
   }, []);
 
   return (
@@ -59,7 +61,12 @@ const ItemDetails = () => {
         <section aria-label="section" className="mt90 sm-mt-0">
           <div className="container">
             <div className="row">
-              <div className="col-md-6 text-center">
+              {/* LEFT: Image */}
+              <div
+                className="col-md-6 text-center"
+                data-aos="fade-down"
+                data-aos-delay="500"
+              >
                 {loading ? (
                   <div
                     style={{
@@ -73,12 +80,21 @@ const ItemDetails = () => {
                   <img
                     src={item?.nftImage}
                     alt={item?.title}
-                    className="img-fluid img-rounded mb-sm-30 nft-image"
+                    className="img-fluid img-rounded mb-sm-30 nft-image tranny"
+                    data-aos="fade-down"
+                    data-aos-delay="500"
                   />
                 )}
               </div>
-              <div className="col-md-6">
-                <div className="item_info">
+
+              {/* RIGHT: Info */}
+              <div className="col-md-6 tranny ">
+                <div
+                  className="item_info"
+                  data-aos="fade-up"
+                  data-aos-delay="500"
+                >
+                  {/* Title */}
                   {loading ? (
                     <div
                       style={{
@@ -90,6 +106,8 @@ const ItemDetails = () => {
                   ) : (
                     <h2>{item?.title}</h2>
                   )}
+
+                  {/* Views / Likes */}
                   <div className="item_info_counts">
                     {loading ? (
                       <>
@@ -120,6 +138,8 @@ const ItemDetails = () => {
                       </>
                     )}
                   </div>
+
+                  {/* Description */}
                   {loading ? (
                     <>
                       <div style={skeletonBox} />
@@ -129,83 +149,149 @@ const ItemDetails = () => {
                   ) : (
                     <p>{item?.description}</p>
                   )}
-                  <div className="d-flex flex-row">
-                    <div className="mr40">
-                      <h6>Owner</h6>
-                      <div className="item_author">
-                        {loading ? (
-                          <div
+
+                  {/* Owner + Creator block (card style) */}
+                  <div style={{ marginTop: "28px" }}>
+                    {/* Owner */}
+                    <div style={{ marginBottom: "16px" }}>
+                      <h6 style={{ fontWeight: "600", marginBottom: "6px" }}>
+                        Owner
+                      </h6>
+                      {loading ? (
+                        <div
+                          style={{
+                            ...skeletonBox,
+                            width: "50px",
+                            height: "50px",
+                            borderRadius: "50%",
+                          }}
+                        />
+                      ) : (
+                        <Link
+                          to={`/author/${item?.ownerId}`}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "12px",
+                            textDecoration: "none",
+                          }}
+                        >
+                          <img
+                            src={item?.ownerImage}
+                            alt={item?.ownerName}
+                            className="lazy"
                             style={{
-                              ...skeletonBox,
                               width: "50px",
                               height: "50px",
                               borderRadius: "50%",
+                              objectFit: "cover",
                             }}
                           />
-                        ) : (
-                          <Link to={`/author/${item?.ownerId}`}>
-                            <img
-                              src={item?.ownerImage}
-                              alt={item?.ownerName}
-                              className="lazy"
-                              style={{
-                                width: "50px",
-                                height: "50px",
-                                borderRadius: "50%",
-                                objectFit: "cover",
-                              }}
-                            />
-                            <i className="fa fa-check" />
-                          </Link>
-                        )}
-                        {!loading && (
-                          <div className="author_list_info">
-                            <Link to={`/author/${item?.ownerId}`}>
-                              {item?.ownerName}
-                            </Link>
-                          </div>
-                        )}
-                      </div>
+                          <span
+                            style={{
+                              color: "#000",
+                              fontWeight: "500",
+                              fontSize: "16px",
+                            }}
+                          >
+                            {item?.ownerName}
+                          </span>
+                          <i
+                            className="fa fa-check"
+                            style={{ color: "#7C4DFF" }}
+                          />
+                        </Link>
+                      )}
                     </div>
-                    <div className="mr40">
-                      <h6>Creator</h6>
-                      <div className="item_author">
-                        {loading ? (
-                          <div
+
+                    {/* Creator */}
+                    <div style={{ marginBottom: "24px" }}>
+                      <h6 style={{ fontWeight: "600", marginBottom: "6px" }}>
+                        Creator
+                      </h6>
+                      {loading ? (
+                        <div
+                          style={{
+                            ...skeletonBox,
+                            width: "50px",
+                            height: "50px",
+                            borderRadius: "50%",
+                          }}
+                        />
+                      ) : (
+                        <Link
+                          to={`/author/${item?.creatorId}`}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "12px",
+                            textDecoration: "none",
+                          }}
+                        >
+                          <img
+                            src={item?.creatorImage}
+                            alt={item?.creatorName}
+                            className="lazy"
                             style={{
-                              ...skeletonBox,
                               width: "50px",
                               height: "50px",
                               borderRadius: "50%",
+                              objectFit: "cover",
                             }}
                           />
-                        ) : (
-                          <Link to={`/author/${item?.creatorId}`}>
-                            <img
-                              src={item?.creatorImage}
-                              alt={item?.creatorName}
-                              className="lazy"
-                              style={{
-                                width: "50px",
-                                height: "50px",
-                                borderRadius: "50%",
-                                objectFit: "cover",
-                              }}
-                            />
-                            <i className="fa fa-check" />
-                          </Link>
-                        )}
-                        {!loading && (
-                          <div className="author_list_info">
-                            <Link to={`/author/${item?.creatorId}`}>
-                              {item?.creatorName}
-                            </Link>
-                          </div>
-                        )}
-                      </div>
+                          <span
+                            style={{
+                              color: "#000",
+                              fontWeight: "500",
+                              fontSize: "16px",
+                            }}
+                          >
+                            {item?.creatorName}
+                          </span>
+                          <i
+                            className="fa fa-check"
+                            style={{ color: "#7C4DFF" }}
+                          />
+                        </Link>
+                      )}
+                    </div>
+
+                    {/* Price (card style) */}
+                    <div>
+                      <h6 style={{ fontWeight: "600", marginBottom: "6px" }}>
+                        Price
+                      </h6>
+                      {loading ? (
+                        <div
+                          style={{
+                            ...skeletonBox,
+                            width: "120px",
+                            minHeight: "32px",
+                          }}
+                        />
+                      ) : (
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "8px",
+                          }}
+                        >
+                          <img
+                            src={EthImage}
+                            alt="ETH"
+                            style={{ height: "20px" }}
+                          />
+                          <span style={{ fontSize: "18px", fontWeight: "600" }}>
+                            {item?.price}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
-                  <div className="de_tab tab_simple">
+
+                  {/* Optional: legacy tab layout price if you still use it */}
+                  {/* <div className="de_tab tab_simple" style={{ marginTop: 24 }}>
                     <div className="de_tab_content">
                       <div className="spacer-40" />
                       <h6>Price</h6>
@@ -224,10 +310,11 @@ const ItemDetails = () => {
                         </div>
                       )}
                     </div>
-                  </div>
+                  </div> */}
+                  {/* end right content */}
                 </div>
               </div>
-              {/* end right */}
+              {/* end right column */}
             </div>
           </div>
         </section>
