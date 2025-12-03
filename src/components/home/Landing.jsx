@@ -31,7 +31,11 @@ const Landing = () => {
       <div className="v-center">
         <div className="container">
           <div className="row align-items-center">
-            <div className="col-md-6" data-aos="zoom-in" data-aos-delay="200">
+            <div
+              className="col-md-6"
+              data-aos="zoom-in-right"
+              data-aos-delay="1000"
+            >
               <div className="spacer-single"></div>
               <h6>
                 <span className="text-uppercase id-color-2">
@@ -56,8 +60,8 @@ const Landing = () => {
                 src={NFT}
                 className="lazy img-fluid"
                 alt=""
-                data-aos="zoom-in"
-                data-aos-delay="200"
+                data-aos="zoom-out-left"
+                data-aos-delay="1000"
               />
             </div>
           </div>

@@ -53,6 +53,10 @@ const Author = () => {
     };
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Follow/unfollow button logic
   const handleFollowToggle = () => {
     setFollowers((prev) => prev + (hasFollowed ? -1 : 1));
