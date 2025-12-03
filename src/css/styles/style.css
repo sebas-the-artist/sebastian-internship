@@ -16744,3 +16744,11 @@ html:not(.no-js) [data-aos="fade-left"].aos-animate,
 html:not(.no-js) [data-aos="fade-right"].aos-animate {
   transform: translate3d(0, 0, 0);
 }
+
+.de_countdown.de_countdown--empty {
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+  color: transparent !important;
+}

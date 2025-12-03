@@ -1518,3 +1518,17 @@ you can use the generic selector below, but it's slower:
 * {
   transform: null;
 }
+.de_countdown .de_countdown--empty {
+  border-color: #ffffff; /* or border: none; */
+  color: transparent; /* hide any accidental text */
+}
+/* Keep your existing .de_countdown styles */
+/* Then override when empty */
+
+.de_countdown.de_countdown--empty {
+  border: none !important; /* removes border */
+  box-shadow: none !important; /* in case the “border” is a shadow */
+  padding: 0 !important; /* optional: remove pill spacing */
+  background: transparent !important;
+  color: transparent !important; /* just in case */
+}
